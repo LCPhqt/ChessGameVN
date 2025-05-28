@@ -100,12 +100,15 @@ export default function ChessBoard({ gameState, getPieceAt, selectSquare }: Ches
               `}
             >
               {piece && (
-                <span className={`chess-piece select-none ${
+                <span className={`chess-piece select-none font-bold ${
                   ['♜', '♞', '♝', '♛', '♚', '♟'].includes(piece) ? 'text-black' : 'text-white'
                 }`} style={{
                   textShadow: ['♜', '♞', '♝', '♛', '♚', '♟'].includes(piece) 
-                    ? '1px 1px 2px rgba(255,255,255,0.8)' 
-                    : '1px 1px 2px rgba(0,0,0,0.8)'
+                    ? '2px 2px 4px rgba(255,255,255,0.9)' 
+                    : '2px 2px 4px rgba(0,0,0,0.9)',
+                  WebkitTextStroke: ['♜', '♞', '♝', '♛', '♚', '♟'].includes(piece) 
+                    ? 'none' 
+                    : '1px rgba(0,0,0,0.3)'
                 }}>
                   {piece}
                 </span>
