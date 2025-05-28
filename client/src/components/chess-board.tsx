@@ -20,20 +20,13 @@ export default function ChessBoard({ gameState, getPieceAt, selectSquare }: Ches
     ['r_w', 'n_w', 'b_w', 'q_w', 'k_w', 'b_w', 'n_w', 'r_w'],
   ];
 
-  // Import chess piece images
-  const pieceImages: { [key: string]: string } = {
-    'r_b': '/src/assets/r_b.png',
-    'n_b': '/src/assets/n_b.png', 
-    'b_b': '/src/assets/b_b.png',
-    'q_b': '/src/assets/q_b.png',
-    'k_b': '/src/assets/k_b.png',
-    'p_b': '/src/assets/p_b.png',
-    'r_w': '/src/assets/r_w.png',
-    'n_w': '/src/assets/n_w.png',
-    'b_w': '/src/assets/b_w.png', 
-    'q_w': '/src/assets/q_w.png',
-    'k_w': '/src/assets/k_w.png',
-    'p_w': '/src/assets/p_w.png',
+  // Import chess piece images using React imports
+  const getPieceImage = (piece: string) => {
+    try {
+      return new URL(`../../../attached_assets/${piece}.png`, import.meta.url).href;
+    } catch {
+      return '';
+    }
   };
 
   // Generate board squares with static pieces
@@ -117,11 +110,15 @@ export default function ChessBoard({ gameState, getPieceAt, selectSquare }: Ches
             >
               {piece && (
                 <img 
-                  src={`@assets/${piece}.png`}
+                  src={getPieceImage(piece)}
                   alt={piece}
                   className="chess-piece w-12 h-12 object-contain select-none"
                   style={{
                     filter: 'drop-shadow(1px 1px 2px rgba(0,0,0,0.3))'
+                  }}
+                  onError={(e) => {
+                    console.log(`Failed to load image for piece: ${piece}`);
+                    e.currentTarget.style.display = 'none';
                   }}
                 />
               )}
