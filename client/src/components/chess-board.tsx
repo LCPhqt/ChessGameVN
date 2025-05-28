@@ -10,15 +10,31 @@ interface ChessBoardProps {
 export default function ChessBoard({ gameState, getPieceAt, selectSquare }: ChessBoardProps) {
   // Static chess board with pieces for display only
   const staticBoard = [
-    ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜'],
-    ['♟', '♟', '♟', '♟', '♟', '♟', '♟', '♟'],
+    ['r_b', 'n_b', 'b_b', 'q_b', 'k_b', 'b_b', 'n_b', 'r_b'],
+    ['p_b', 'p_b', 'p_b', 'p_b', 'p_b', 'p_b', 'p_b', 'p_b'],
     ['', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', ''],
-    ['♙', '♙', '♙', '♙', '♙', '♙', '♙', '♙'],
-    ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖'],
+    ['p_w', 'p_w', 'p_w', 'p_w', 'p_w', 'p_w', 'p_w', 'p_w'],
+    ['r_w', 'n_w', 'b_w', 'q_w', 'k_w', 'b_w', 'n_w', 'r_w'],
   ];
+
+  // Import chess piece images
+  const pieceImages: { [key: string]: string } = {
+    'r_b': '/src/assets/r_b.png',
+    'n_b': '/src/assets/n_b.png', 
+    'b_b': '/src/assets/b_b.png',
+    'q_b': '/src/assets/q_b.png',
+    'k_b': '/src/assets/k_b.png',
+    'p_b': '/src/assets/p_b.png',
+    'r_w': '/src/assets/r_w.png',
+    'n_w': '/src/assets/n_w.png',
+    'b_w': '/src/assets/b_w.png', 
+    'q_w': '/src/assets/q_w.png',
+    'k_w': '/src/assets/k_w.png',
+    'p_w': '/src/assets/p_w.png',
+  };
 
   // Generate board squares with static pieces
   const squares = [];
@@ -100,17 +116,14 @@ export default function ChessBoard({ gameState, getPieceAt, selectSquare }: Ches
               `}
             >
               {piece && (
-                <span className={`chess-piece select-none font-bold ${
-                  ['♜', '♞', '♝', '♛', '♚', '♟'].includes(piece) ? 'text-black' : 'text-white'
-                }`} style={{
-                  fontSize: '3rem',
-                  fontWeight: 'bold',
-                  color: ['♜', '♞', '♝', '♛', '♚', '♟'].includes(piece) ? '#000000' : '#FFFFFF',
-                  textShadow: '1px 1px 2px rgba(128,128,128,0.5)',
-                  filter: 'drop-shadow(1px 1px 1px rgba(0,0,0,0.3))'
-                }}>
-                  {piece}
-                </span>
+                <img 
+                  src={`@assets/${piece}.png`}
+                  alt={piece}
+                  className="chess-piece w-12 h-12 object-contain select-none"
+                  style={{
+                    filter: 'drop-shadow(1px 1px 2px rgba(0,0,0,0.3))'
+                  }}
+                />
               )}
             </div>
           ))}
