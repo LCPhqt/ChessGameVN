@@ -78,12 +78,7 @@ export default function ChessBoard({ gameState, getPieceAt, selectSquare }: Ches
 
       {/* Chess Board Container */}
       <div className="glass-morphism rounded-3xl p-8 shadow-2xl">
-        {/* Game Status */}
-        <div className="mb-6 text-center">
-          <div className={`${getStatusColor()} text-white px-4 py-2 rounded-full text-sm font-medium`}>
-            {getGameStatusText()}
-          </div>
-        </div>
+
 
         {/* Chess Board */}
         <div className="chess-board grid grid-cols-8 gap-0 border-4 border-gray-700 rounded-xl overflow-hidden shadow-2xl">
