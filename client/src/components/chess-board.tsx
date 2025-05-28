@@ -33,7 +33,7 @@ export default function ChessBoard({ gameState, getPieceAt, selectSquare }: Ches
   }, [selectSquare]);
 
   const getGameStatusText = () => {
-    if (!gameState.game) return '';
+    if (!gameState.game) return 'Đang tải...';
     
     switch (gameState.gameStatus) {
       case 'checkmate':
@@ -78,7 +78,36 @@ export default function ChessBoard({ gameState, getPieceAt, selectSquare }: Ches
 
       {/* Chess Board Container */}
       <div className="glass-morphism rounded-3xl p-8 shadow-2xl">
-
+        {/* Game Status */}
+        <div className="mb-6 text-center">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center">
+                <span className="text-white text-lg">♛</span>
+              </div>
+              <span className="font-medium">Đối thủ</span>
+            </div>
+            <div className="text-2xl font-mono bg-gray-800 px-4 py-2 rounded-lg">
+              {formatTime(gameState.blackTime)}
+            </div>
+          </div>
+          
+          <div className={`${getStatusColor()} text-white px-4 py-2 rounded-full text-sm font-medium`}>
+            {getGameStatusText()}
+          </div>
+          
+          <div className="flex items-center justify-between mt-4">
+            <div className="text-2xl font-mono bg-gray-800 px-4 py-2 rounded-lg">
+              {formatTime(gameState.whiteTime)}
+            </div>
+            <div className="flex items-center space-x-3">
+              <span className="font-medium">Bạn</span>
+              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                <span className="text-black text-lg">♔</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Chess Board */}
         <div className="chess-board grid grid-cols-8 gap-0 border-4 border-gray-700 rounded-xl overflow-hidden shadow-2xl">
@@ -109,7 +138,19 @@ export default function ChessBoard({ gameState, getPieceAt, selectSquare }: Ches
           ))}
         </div>
 
-
+        {/* Move History */}
+        <div className="mt-6 glass-morphism rounded-xl p-4">
+          <h3 className="text-white font-medium mb-3">Lịch sử nước đi</h3>
+          <div className="max-h-32 overflow-y-auto">
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              {gameState.moveHistory.map((move, index) => (
+                <div key={index} className="text-gray-300">
+                  {index % 2 === 0 ? `${Math.floor(index / 2) + 1}. ` : ''}{move}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
