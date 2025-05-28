@@ -33,7 +33,7 @@ export default function ChessBoard({ gameState, getPieceAt, selectSquare }: Ches
   }, [selectSquare]);
 
   const getGameStatusText = () => {
-    if (!gameState.game) return 'Đang tải...';
+    if (!gameState.game) return '';
     
     switch (gameState.gameStatus) {
       case 'checkmate':
@@ -114,19 +114,7 @@ export default function ChessBoard({ gameState, getPieceAt, selectSquare }: Ches
           ))}
         </div>
 
-        {/* Move History */}
-        <div className="mt-6 glass-morphism rounded-xl p-4">
-          <h3 className="text-white font-medium mb-3">Lịch sử nước đi</h3>
-          <div className="max-h-32 overflow-y-auto">
-            <div className="grid grid-cols-2 gap-2 text-sm">
-              {gameState.moveHistory.map((move, index) => (
-                <div key={index} className="text-gray-300">
-                  {index % 2 === 0 ? `${Math.floor(index / 2) + 1}. ` : ''}{move}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   );
