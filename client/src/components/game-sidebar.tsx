@@ -113,17 +113,10 @@ export default function GameSidebar({
           <h3 className="text-lg font-semibold mb-4 text-white">Điều khiển</h3>
           <div className="space-y-3">
             <Button
-              onClick={onNewGame}
-              className="w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 font-medium"
-            >
-              Ván mới
-            </Button>
-            <Button
-              onClick={onUndoMove}
               variant="secondary"
               className="w-full glass-morphism border-gray-600 hover:bg-gray-700 font-medium"
             >
-              Hoàn tác
+              Thông tin người chơi
             </Button>
             <Button
               onClick={onShowSettings}
