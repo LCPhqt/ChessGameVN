@@ -8,22 +8,31 @@ interface ChessBoardProps {
 }
 
 export default function ChessBoard({ gameState, getPieceAt, selectSquare }: ChessBoardProps) {
-  // Generate board squares
+  // Static chess board with pieces for display only
+  const staticBoard = [
+    ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜'],
+    ['♟', '♟', '♟', '♟', '♟', '♟', '♟', '♟'],
+    ['', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', ''],
+    ['♙', '♙', '♙', '♙', '♙', '♙', '♙', '♙'],
+    ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖'],
+  ];
+
+  // Generate board squares with static pieces
   const squares = [];
-  for (let rank = 8; rank >= 1; rank--) {
+  for (let rank = 0; rank < 8; rank++) {
     for (let file = 0; file < 8; file++) {
-      const square = String.fromCharCode(97 + file) + rank; // a-h, 1-8
       const isLight = (rank + file) % 2 === 0;
-      const piece = getPieceAt(square);
-      const isSelected = gameState.selectedSquare === square;
-      const isValidMove = gameState.possibleMoves.includes(square);
+      const piece = staticBoard[rank][file];
       
       squares.push({
-        square,
+        square: `${String.fromCharCode(97 + file)}${8 - rank}`,
         isLight,
         piece,
-        isSelected,
-        isValidMove,
+        isSelected: false,
+        isValidMove: false,
       });
     }
   }
@@ -86,12 +95,9 @@ export default function ChessBoard({ gameState, getPieceAt, selectSquare }: Ches
             <div
               key={square}
               className={`
-                chess-square w-16 h-16 flex items-center justify-center text-4xl cursor-pointer
+                chess-square w-16 h-16 flex items-center justify-center text-4xl
                 ${isLight ? 'bg-amber-100' : 'bg-amber-800'}
-                ${isSelected ? 'highlight' : ''}
-                ${isValidMove ? 'valid-move' : ''}
               `}
-              onClick={() => handleSquareClick(square)}
             >
               {piece && (
                 <span className="chess-piece select-none">
