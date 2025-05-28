@@ -103,12 +103,11 @@ export default function ChessBoard({ gameState, getPieceAt, selectSquare }: Ches
                 <span className={`chess-piece select-none font-bold ${
                   ['♜', '♞', '♝', '♛', '♚', '♟'].includes(piece) ? 'text-black' : 'text-white'
                 }`} style={{
-                  textShadow: ['♜', '♞', '♝', '♛', '♚', '♟'].includes(piece) 
-                    ? '2px 2px 4px rgba(255,255,255,0.9)' 
-                    : '2px 2px 4px rgba(0,0,0,0.9)',
-                  WebkitTextStroke: ['♜', '♞', '♝', '♛', '♚', '♟'].includes(piece) 
-                    ? 'none' 
-                    : '1px rgba(0,0,0,0.3)'
+                  fontSize: '3rem',
+                  fontWeight: 'bold',
+                  color: ['♜', '♞', '♝', '♛', '♚', '♟'].includes(piece) ? '#000000' : '#FFFFFF',
+                  textShadow: '1px 1px 2px rgba(128,128,128,0.5)',
+                  filter: 'drop-shadow(1px 1px 1px rgba(0,0,0,0.3))'
                 }}>
                   {piece}
                 </span>
